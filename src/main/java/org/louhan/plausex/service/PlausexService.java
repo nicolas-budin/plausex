@@ -5,4 +5,9 @@ import org.louhan.plausex.xjc.Delivery;
 public interface PlausexService {
 
     Delivery createDelivery();
+
+
+    DossierService getDossierService();
+    AccountingEntryService getAccountingEntryService();
+    InfosTypeService getInfosTypeService();
 }

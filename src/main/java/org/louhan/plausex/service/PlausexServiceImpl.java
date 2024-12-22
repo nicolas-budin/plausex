@@ -4,7 +4,6 @@ package org.louhan.plausex.service;
 import org.louhan.plausex.xjc.AccountingEntriesType;
 import org.louhan.plausex.xjc.Delivery;
 import org.louhan.plausex.xjc.DossiersType;
-import org.louhan.plausex.xjc.InfosType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +13,16 @@ public class PlausexServiceImpl implements PlausexService {
 
     protected DossierService dossierService;
     protected AccountingEntryService accountingEntryService;
-    protected PersonService personService;
+    protected InfosTypeService infosTypeService;
 
     @Autowired
     public PlausexServiceImpl(DossierService dossierService,
                               AccountingEntryService accountingEntryService,
-                              PersonService personService) {
+                              InfosTypeService infosTypeService) {
+
         this.dossierService = dossierService;
         this.accountingEntryService = accountingEntryService;
-        this.personService = personService;
+        this.infosTypeService = infosTypeService;
     }
 
     @Override
@@ -31,11 +31,7 @@ public class PlausexServiceImpl implements PlausexService {
         Delivery delivery = new Delivery();
 
         // info stuff
-        delivery.setInfos(new InfosType());
-        InfosType infosType = delivery.getInfos();
-
-        infosType.setExpInfos(new InfosType.ExpInfos());
-        infosType.setFfsInfos(new InfosType.FfsInfos());
+        delivery.setInfos(this.infosTypeService.createInfosType());
 
         // dossier stuff
         delivery.setDossiers(new DossiersType());
@@ -47,4 +43,18 @@ public class PlausexServiceImpl implements PlausexService {
     }
 
 
+    @Override
+    public DossierService getDossierService() {
+        return dossierService;
+    }
+
+    @Override
+    public AccountingEntryService getAccountingEntryService() {
+        return accountingEntryService;
+    }
+
+    @Override
+    public InfosTypeService getInfosTypeService() {
+        return infosTypeService;
+    }
 }
