@@ -6,7 +6,7 @@
 //
 
 
-package org.louhan.xjc;
+package org.louhan.plausex.xjc;
 
 
 import jakarta.xml.bind.annotation.XmlRegistry;

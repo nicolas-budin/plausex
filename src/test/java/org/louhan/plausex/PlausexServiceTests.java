@@ -3,41 +3,29 @@ package org.louhan.plausex;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
 import org.junit.jupiter.api.Test;
+import org.louhan.plausex.service.PlausexService;
 import org.louhan.plausex.xjc.Delivery;
-import org.louhan.plausex.xjc.InfosType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
 
 @SpringBootTest
-class PlausexApplicationTests {
+class PlausexServiceTests {
 
-    private static final Logger logger = LoggerFactory.getLogger(PlausexApplicationTests.class);
+    private static final Logger logger = LoggerFactory.getLogger(PlausexServiceTests.class);
 
-    @Test
-    void contextLoads() {
-    }
-
+    @Autowired
+    protected PlausexService plausexService;
 
     @Test
     void createHelloWorldXML() throws Exception {
 
-
         try {
 
-            Delivery delivery = new Delivery();
-
-            delivery.setInfos(new InfosType());
-
-            InfosType infosType = delivery.getInfos();
-
-            infosType.setExpInfos(new InfosType.ExpInfos());
-            infosType.setFfsInfos(new InfosType.FfsInfos());
-
-            infosType.getFfsInfos().setFfsVersion("1234567890");
-
+            Delivery delivery = this.plausexService.createDelivery();
 
             JAXBContext context = JAXBContext.newInstance(Delivery.class);
             Marshaller marshaller = context.createMarshaller();
