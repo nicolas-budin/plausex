@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<delivery
+xmlns="http://bfs.ch/shs/delivery/validation"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://bfs.ch/shs/delivery/validation do-b-13.05-SHS-07.xsd">
+  <infos>
+    <ffsInfos>
+      <ffsId>11</ffsId>
+      <ffsVersion>6.6.3.5</ffsVersion>
+    </ffsInfos>
+    <expInfos>
+	  <supplierId>15367</supplierId>
+	  <extractionDateTime>2022-11-09T16:00:00</extractionDateTime>
+	  <referenceDate>2021-01-01</referenceDate>
+	  <isProd>1</isProd>     
+    </expInfos>
+  </infos>
+  <dossiers>
+	<dossier dossierId="1" dossierProfId="3">
+		<serviceId>123</serviceId>
+		<serviceDescription>code 123</serviceDescription>
+		<socialBenefitCode>code service</socialBenefitCode>
+		<socialBenefitDesc>desc service</socialBenefitDesc>
+		<municipalityId>33333</municipalityId>
+		<residentialStatus></residentialStatus> 
+		<rentFullApartment></rentFullApartment>
+		<rentShare></rentShare>
+		<apartmentSize></apartmentSize>
+		<hhMembers></hhMembers>
+		<closingReason></closingReason>
+		<dossierRespPersonId></dossierRespPersonId>
+		<dossierRespPersonName></dossierRespPersonName>
+		<dateStartEntitlement></dateStartEntitlement>
+		<addressCorrespondence>
+			<organisationName>Organisation Test</organisationName>
+			<firstName>Jean</firstName>
+			<lastName>Dupont</lastName>
+			<street>Rue de la Gare</street>
+			<houseNumber>20</houseNumber>
+			<postOfficeBox>CP 2010</postOfficeBox>
+			<swissZipCode>2000</swissZipCode>
+			<town>Neuchâtel</town>
+		</addressCorrespondence>
+		<persons>
+			<person personId="120" PersonProfId="11">
+				<vn></vn>
+				<officialName>A</officialName>
+				<firstName>A</firstName>
+				<dateOfBirth>2001-01-02</dateOfBirth>
+				<sex>1</sex>
+				<maritalStatus></maritalStatus>
+				<separation>1</separation>
+				<countryId></countryId>
+				<education></education>
+				<educationLevel></educationLevel>
+				<employmentSituation></employmentSituation>
+				<employmentRate></employmentRate>
+				<relationshipToApplicant></relationshipToApplicant>
+				<foreignerCategoryId></foreignerCategoryId>
+				<foreignerCategoryDesc></foreignerCategoryDesc>
+				<datEntry></datEntry>				
+			</person>
+		</persons>	
+	</dossier>
+  </dossiers>
+  <accountingEntries>
+	<accountingEntry accountingEntryId="A" accountingEntryProfId="1" dossierIdRef="1" personIdRef="101">	
+		<accountingEntryCode>A-25</accountingEntryCode>
+		<accountingEntryCodeDesc>AideAuLoyer</accountingEntryCodeDesc>
+		<amount>12.25</amount>
+		<datRegistration>2022-11-03</datRegistration>
+		<datAccountingEntry></datAccountingEntry>
+		<datSubjectFrom></datSubjectFrom>
+		<datSubjectTo></datSubjectTo>
+	</accountingEntry>
+	<accountingEntry accountingEntryId="B" accountingEntryProfId="1" dossierIdRef="1" personIdRef="101">	
+		<accountingEntryCode>A-25</accountingEntryCode>
+		<accountingEntryCodeDesc>AideAuLoyer</accountingEntryCodeDesc>
+		<amount>12.25</amount>
+		<datRegistration>2022-11-03</datRegistration>
+		<datAccountingEntry></datAccountingEntry>
+		<datSubjectFrom></datSubjectFrom>
+		<datSubjectTo></datSubjectTo>
+	</accountingEntry>
+  </accountingEntries>
+</delivery>
+
+
