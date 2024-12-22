@@ -8,7 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import javax.xml.XMLConstants;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -17,6 +19,8 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -156,7 +160,7 @@ public class PlausexServiceImpl implements PlausexService {
 
 
     @Override
-    public boolean validateXMLSchema(String xsdPath, String xmlPath) {
+    public boolean isValidXMLSchema(String xsdPath, String xmlPath) {
         try {
             // Create a SchemaFactory for W3C XML Schema
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -177,5 +181,48 @@ public class PlausexServiceImpl implements PlausexService {
             logger.error("Validation Error: " + e.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public List<String> validateXMLSchema(String xsdPath, String xmlPath) {
+
+        List<String> issues = new ArrayList<>();
+
+        try {
+            // Create a SchemaFactory for W3C XML Schema
+            SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
+            // Load the XSD file as a schema
+            Schema schema = factory.newSchema(new File(xsdPath));
+
+            // Create a Validator from the schema
+            Validator validator = schema.newValidator();
+
+            // Attach a custom ErrorHandler to capture all issues
+            validator.setErrorHandler(new ErrorHandler() {
+                @Override
+                public void warning(SAXParseException exception) throws SAXException {
+                    issues.add("WARNING: Line " + exception.getLineNumber() + ": " + exception.getMessage());
+                }
+
+                @Override
+                public void error(SAXParseException exception) throws SAXException {
+                    issues.add("ERROR: Line " + exception.getLineNumber() + ": " + exception.getMessage());
+                }
+
+                @Override
+                public void fatalError(SAXParseException exception) throws SAXException {
+                    issues.add("FATAL: Line " + exception.getLineNumber() + ": " + exception.getMessage());
+                }
+            });
+
+            // Validate the XML file against the schema
+            validator.validate(new StreamSource(new File(xmlPath)));
+
+        } catch (Exception e) {
+            issues.add("Validation failed: " + e.getMessage());
+        }
+
+        return issues;
     }
 }

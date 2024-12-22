@@ -1,0 +1,8 @@
+<jaxb:bindings version="2.1" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <jaxb:bindings schemaLocation="your-schema.xsd">
+        <jaxb:bindings node="//xs:simpleType[@name='shsSexType']">
+            <jaxb:typesafeEnumClass name="ShsSexType"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+</jaxb:bindings>

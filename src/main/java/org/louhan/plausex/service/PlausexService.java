@@ -4,6 +4,7 @@ import org.louhan.plausex.xjc.*;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.File;
+import java.util.List;
 
 public interface PlausexService {
 
@@ -30,5 +31,7 @@ public interface PlausexService {
 
     File delivery2XML(Delivery delivery, String path) throws Exception;
 
-    boolean validateXMLSchema(String xsdPath, String xmlPath);
+    boolean isValidXMLSchema(String xsdPath, String xmlPath);
+
+    List<String> validateXMLSchema(String xsdPath, String xmlPath);
 }
