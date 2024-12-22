@@ -34,12 +34,13 @@ import jakarta.xml.bind.annotation.*;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(namespace = "http://bfs.ch/shs/delivery/validation", propOrder = {
     "infos",
     "dossiers",
     "accountingEntries"
 })
-@XmlRootElement(name = "delivery")
+
+@XmlRootElement(name = "delivery", namespace = "http://bfs.ch/shs/delivery/validation")
 public class Delivery {
 
     @XmlElement(required = true)
