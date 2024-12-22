@@ -39,7 +39,7 @@ class PlausexServiceTests {
             Marshaller marshaller = context.createMarshaller();
 
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            marshaller.marshal(delivery, new File("tmp/generated-output.xml"));
+            marshaller.marshal(delivery, new File("tmp/generated-output-" + System.currentTimeMillis() + ".xml"));
 
             logger.info("XML generated successfully!"); // Replaced System.out.println
 
