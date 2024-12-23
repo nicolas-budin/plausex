@@ -1,0 +1,56 @@
+
+<jaxb:bindings version="2.1"
+               xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Bindings for the main schema -->
+    <jaxb:bindings schemaLocation="do-b-13.05-SHS-07.xsd" node="/xs:schema">
+
+        <!-- Custom binding for the shsSexType enum -->
+        <jaxb:bindings node="xs:simpleType[@name='shsSexType']">
+            <jaxb:typesafeEnumClass name="ShsSexType">
+                <jaxb:typesafeEnumMember name="MALE" value="1"/>
+                <jaxb:typesafeEnumMember name="FEMALE" value="2"/>
+                <jaxb:typesafeEnumMember name="OTHER" value="3"/>
+                <jaxb:typesafeEnumMember name="EMPTY" value=""/>
+            </jaxb:typesafeEnumClass>
+        </jaxb:bindings>
+
+        <!-- Custom binding for the shsMaritalStatusType enum -->
+        <jaxb:bindings node="xs:simpleType[@name='shsMaritalStatusType']">
+            <jaxb:typesafeEnumClass name="ShsMaritalStatusType">
+                <jaxb:typesafeEnumMember name="SINGLE" value="1"/>
+                <jaxb:typesafeEnumMember name="MARRIED" value="2"/>
+                <jaxb:typesafeEnumMember name="SEPARATED" value="3"/>
+                <jaxb:typesafeEnumMember name="DIVORCED" value="4"/>
+                <jaxb:typesafeEnumMember name="WIDOWED" value="5"/>
+                <jaxb:typesafeEnumMember name="REGISTERED_PARTNERSHIP" value="6"/>
+                <jaxb:typesafeEnumMember name="DISSOLVED_PARTNERSHIP" value="7"/>
+                <jaxb:typesafeEnumMember name="UNKNOWN" value="9"/>
+                <jaxb:typesafeEnumMember name="EMPTY" value=""/>
+            </jaxb:typesafeEnumClass>
+        </jaxb:bindings>
+
+        <!-- Custom binding for the shsSeparationType enum -->
+        <jaxb:bindings node="xs:simpleType[@name='shsSeparationType']">
+            <jaxb:typesafeEnumClass name="ShsSeparationType">
+                <jaxb:typesafeEnumMember name="YES" value="1"/>
+                <jaxb:typesafeEnumMember name="NO" value="2"/>
+                <jaxb:typesafeEnumMember name="EMPTY" value=""/>
+            </jaxb:typesafeEnumClass>
+        </jaxb:bindings>
+
+        <!-- Custom binding for the shsIsProdType enum -->
+        <jaxb:bindings node="xs:simpleType[@name='shsIsProdType']">
+            <jaxb:typesafeEnumClass name="ShsIsProdType">
+                <jaxb:typesafeEnumMember name="NO" value="0"/>
+                <jaxb:typesafeEnumMember name="YES" value="1"/>
+                <jaxb:typesafeEnumMember name="TRUE" value="true"/>
+                <jaxb:typesafeEnumMember name="FALSE" value="false"/>
+            </jaxb:typesafeEnumClass>
+        </jaxb:bindings>
+
+        <!-- Additional bindings for other types can be added here if needed -->
+
+    </jaxb:bindings>
+</jaxb:bindings>

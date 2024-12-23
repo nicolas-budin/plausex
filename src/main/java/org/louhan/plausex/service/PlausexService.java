@@ -21,7 +21,7 @@ public interface PlausexService {
     AccountingEntryType addAccountingEntry(Delivery delivery, String accountingEntryCode, String accountingEntryCodeDesc, String amount, XMLGregorianCalendar datRegistration, String datAccountingEntry, String datSubjectFrom, String datSubjectTo, String accountingEntryId, String accountingEntryProfId, String dossierIdRef, String personIdRef);
 
     // Person
-    PersonType addPerson(DossierType dossierType, String vn, String officialName, String firstName, String dateOfBirth, String sex, String maritalStatus, String separation, String countryId, String education, String educationLevel, String employmentSituation, String employmentRate, String relationshipToApplicant, String foreignerCategoryId, String foreignerCategoryDesc, String datEntry, String personId, String personProfId);
+    PersonType addPerson(DossierType dossierType, String vn, String officialName, String firstName, String dateOfBirth, ShsSexType sex, ShsMaritalStatusType maritalStatus, ShsSeparationType separation, String countryId, String education, String educationLevel, String employmentSituation, String employmentRate, String relationshipToApplicant, String foreignerCategoryId, String foreignerCategoryDesc, String datEntry, String personId, String personProfId);
     PersonType addPerson(DossierType dossierType);
 
     // AddressCorrespondence

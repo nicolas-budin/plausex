@@ -2,6 +2,9 @@ package org.louhan.plausex.service;
 
 import org.louhan.plausex.utils.StringUtils;
 import org.louhan.plausex.xjc.PersonType;
+import org.louhan.plausex.xjc.ShsMaritalStatusType;
+import org.louhan.plausex.xjc.ShsSeparationType;
+import org.louhan.plausex.xjc.ShsSexType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -26,9 +29,9 @@ public class PersonServiceImpl implements PersonService {
             String officialName,
             String firstName,
             String dateOfBirth,
-            String sex,
-            String maritalStatus,
-            String separation,
+            ShsSexType sex,
+            ShsMaritalStatusType maritalStatus,
+            ShsSeparationType separation,
             String countryId,
             String education,
             String educationLevel,
@@ -48,9 +51,9 @@ public class PersonServiceImpl implements PersonService {
         if (StringUtils.isValidString(officialName)) personType.setOfficialName(officialName);
         if (StringUtils.isValidString(firstName)) personType.setFirstName(firstName);
         if (StringUtils.isValidString(dateOfBirth)) personType.setDateOfBirth(dateOfBirth);
-        if (StringUtils.isValidString(sex)) personType.setSex(sex);
-        if (StringUtils.isValidString(maritalStatus)) personType.setMaritalStatus(maritalStatus);
-        if (StringUtils.isValidString(separation)) personType.setSeparation(separation);
+        personType.setSex(sex);
+        personType.setMaritalStatus(maritalStatus);
+        personType.setSeparation(separation);
         if (StringUtils.isValidString(countryId)) personType.setCountryId(countryId);
         if (StringUtils.isValidString(education)) personType.setEducation(education);
         if (StringUtils.isValidString(educationLevel)) personType.setEducationLevel(educationLevel);

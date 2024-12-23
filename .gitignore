@@ -32,3 +32,24 @@ build/
 ### VS Code ###
 .vscode/
 /tmp/
+/doc/plausex/dz-f-13/ModSHS_Code_closingReason_fr.csv
+/doc/plausex/dz-f-13/ModSHS_Code_countryId_fr.csv
+/doc/plausex/dz-f-13/ModSHS_Code_education_fr.csv
+/doc/plausex/dz-f-13/ModSHS_Code_employmentRate_fr.csv
+/doc/plausex/dz-f-13/ModSHS_Code_employmentSituation_fr.csv
+/doc/plausex/dz-f-13/ModSHS_Code_maritalStatus_fr.csv
+/doc/plausex/dz-f-13/ModSHS_Code_relationshipToApplicant_fr.csv
+/doc/plausex/dz-f-13/ModSHS_Code_residentialStatus_fr.csv
+/doc/plausex/dz-f-13/ModSHS_Code_separation_fr.csv
+/doc/plausex/dz-f-13/ModSHS_Code_sex_fr.csv
+/doc/plausex/dz-f-13/Readme_historyMunicipalityId_fr.pdf
+/doc/plausex/dz-t-13/ModSHS_Recoding_apartementSize.xlsx
+/doc/plausex/dz-t-13/ModSHS_Recoding_closingReason.xlsx
+/doc/plausex/dz-t-13/ModSHS_Recoding_countryId.xlsx
+/doc/plausex/dz-t-13/ModSHS_Recoding_education.xlsx
+/doc/plausex/dz-t-13/ModSHS_Recoding_employmentRate.xlsx
+/doc/plausex/dz-t-13/ModSHS_Recoding_employmentSituation.xlsx
+/doc/plausex/dz-t-13/ModSHS_Recoding_maritalStatus.xlsx
+/doc/plausex/dz-t-13/ModSHS_Recoding_relationshipToApplicant.xlsx
+/doc/plausex/dz-t-13/ModSHS_Recoding_resedentialStatus.xlsx
+/doc/plausex/dz-t-13/ModSHS_Recoding_sex.xlsx

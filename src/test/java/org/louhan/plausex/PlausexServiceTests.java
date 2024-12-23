@@ -121,9 +121,9 @@ class PlausexServiceTests {
                 "Smith",                 // officialName
                 "John",                  // firstName
                 "1990-01-01",            // dateOfBirth
-                "M",                     // sex
-                "Single",                // maritalStatus
-                "No",                    // separation
+                ShsSexType.FEMALE,                     // sex
+                ShsMaritalStatusType.MARRIED,                // maritalStatus
+                ShsSeparationType.NO,                    // separation
                 "US",                    // countryId
                 "Computer Science",      // education
                 "Bachelor's",            // educationLevel

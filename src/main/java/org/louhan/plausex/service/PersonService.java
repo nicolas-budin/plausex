@@ -1,6 +1,9 @@
 package org.louhan.plausex.service;
 
 import org.louhan.plausex.xjc.PersonType;
+import org.louhan.plausex.xjc.ShsMaritalStatusType;
+import org.louhan.plausex.xjc.ShsSeparationType;
+import org.louhan.plausex.xjc.ShsSexType;
 
 public interface PersonService {
 
@@ -11,9 +14,9 @@ public interface PersonService {
             String officialName,
             String firstName,
             String dateOfBirth,
-            String sex,
-            String maritalStatus,
-            String separation,
+            ShsSexType sex,
+            ShsMaritalStatusType maritalStatus,
+            ShsSeparationType separation,
             String countryId,
             String education,
             String educationLevel,

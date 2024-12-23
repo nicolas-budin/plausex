@@ -1,10 +1,7 @@
 package org.louhan.plausex.service;
 
 import org.louhan.plausex.utils.StringUtils;
-import org.louhan.plausex.xjc.AddressCorrespondenceType;
-import org.louhan.plausex.xjc.DossierType;
-import org.louhan.plausex.xjc.PersonType;
-import org.louhan.plausex.xjc.PersonsType;
+import org.louhan.plausex.xjc.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +34,7 @@ public class DossierServiceImpl implements DossierService {
     }
 
     @Override
-    public PersonType addPerson(DossierType dossierType, String vn, String officialName, String firstName, String dateOfBirth, String sex, String maritalStatus, String separation, String countryId, String education, String educationLevel, String employmentSituation, String employmentRate, String relationshipToApplicant, String foreignerCategoryId, String foreignerCategoryDesc, String datEntry, String personId, String personProfId) {
+    public PersonType addPerson(DossierType dossierType, String vn, String officialName, String firstName, String dateOfBirth, ShsSexType sex, ShsMaritalStatusType maritalStatus, ShsSeparationType separation, String countryId, String education, String educationLevel, String employmentSituation, String employmentRate, String relationshipToApplicant, String foreignerCategoryId, String foreignerCategoryDesc, String datEntry, String personId, String personProfId) {
 
         PersonType personType =  personService.createPerson(vn, officialName, firstName, dateOfBirth, sex, maritalStatus, separation, countryId, education, educationLevel, employmentSituation, employmentRate, relationshipToApplicant, foreignerCategoryId, foreignerCategoryDesc, datEntry, personId, personProfId);
         dossierType.getPersons().getPerson().add(personType);
