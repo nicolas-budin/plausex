@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.louhan.plausex"},{"l":"org.louhan.plausex.service"},{"l":"org.louhan.plausex.utils"},{"l":"org.louhan.plausex.xjc"}];updateSearchResults();
