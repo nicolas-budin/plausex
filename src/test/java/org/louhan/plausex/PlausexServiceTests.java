@@ -85,11 +85,11 @@ class PlausexServiceTests {
                 "67890",                   // dossierProfId (valid)
                 "Service123",              // serviceId (valid)
                 "Service Description",     // serviceDescription (valid)
-                null,                      // socialBenefitCode (invalid: null)
+                "null",                      // socialBenefitCode (invalid: null)
                 "Valid Benefit Desc",      // socialBenefitDesc (valid)
                 123,                       // municipalityId (valid)
                 "Residential Status",      // residentialStatus (valid)
-                null,                      // rentFullApartment (invalid: null)
+                "null",                      // rentFullApartment (invalid: null)
                 "1200",                    // rentShare (valid)
                 "Large",                   // apartmentSize (valid)
                 "4",                       // hhMembers (valid)
@@ -147,20 +147,21 @@ class PlausexServiceTests {
         );
     }
 
-    private AccountingEntryType addAccountingEntry(Delivery delivery) {
+    private AccountingEntryType addAccountingEntry(Delivery delivery) throws Exception{
 
         AccountingEntryType accountingEntryType = this.plausexService.addAccountingEntry(delivery,
                 "CODE123",   // Chaîne valide
                 "",          // Chaîne invalide (vide)
                 "1000.00",   // Chaîne valide
-                null, // Date valide
+                DatatypeFactory.newInstance()
+                        .newXMLGregorianCalendarDate(2024, 3, 10, 0), // Date valide
                 "2024-12-23", // Chaîne valide
-                null,         // Chaîne invalide (nulle)
+                "test",         // Chaîne invalide (nulle)
                 "2024-12-31", // Chaîne valide
                 "EntryID123", // Chaîne valide
-                null,         // Chaîne invalide (nulle)
+                "test",         // Chaîne invalide (nulle)
                 "DossierID789", // Chaîne valide
-                " "           // Chaîne invalide (espaces seulement)
+                "toto"           // Chaîne invalide (espaces seulement)
         );
 
         return accountingEntryType;
