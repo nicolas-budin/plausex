@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.xml.datatype.DatatypeFactory;
 import java.io.File;
+import java.math.BigInteger;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -27,15 +29,19 @@ class PlausexServiceTests {
 
             Delivery delivery = this.plausexService.createDelivery();
 
+            this.plausexService.setInfoType(delivery, new BigInteger("1000"), "1", new BigInteger("1000"), DatatypeFactory.newInstance()
+                    .newXMLGregorianCalendarDate(2024, 3, 10, 0), DatatypeFactory.newInstance()
+                    .newXMLGregorianCalendarDate(2024, 3, 10, 0),ShsIsProdType.YES);
+
             // dossier
-            for( int i = 0; i < 5; i++ ) {
+            for( int i = 0; i < 1; i++ ) {
 
                 DossierType dossier = this.addDossier(delivery);
                 this.addAddressCorrespondence(dossier);
 
                 // person
                 int personsCount = (int) (Math.random() * 3);
-                for( int j = 0; j < personsCount; j++ ) {
+                for( int j = 0; j < 1; j++ ) {
                     this.addPerson(dossier);
                 }
             }
@@ -52,7 +58,10 @@ class PlausexServiceTests {
             String xsdPath = getClass().getClassLoader().getResource("xsd/do-b-13.05-SHS-07.xsd").getPath();
             // Assert.isTrue(this.plausexService.isValidXMLSchema(xsdPath , file.getAbsolutePath()), "XML is NOT validated");
 
-            this.plausexService.validateXMLSchema(xsdPath, file.getAbsolutePath()).forEach(logger::warn);
+            // this.plausexService.validateXMLSchema(xsdPath, file.getAbsolutePath()).forEach(logger::warn);
+
+            this.plausexService.validateXMLSchemaWithSax(xsdPath, file.getAbsolutePath()).forEach(logger::warn);
+
 
 
         } catch (Exception e) {

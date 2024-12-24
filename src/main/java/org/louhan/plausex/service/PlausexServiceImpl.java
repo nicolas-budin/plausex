@@ -8,17 +8,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
+import org.xml.sax.*;
 
 import javax.xml.XMLConstants;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,8 +64,10 @@ public class PlausexServiceImpl implements PlausexService {
     }
 
     @Override
-    public InfosTypeService getInfosTypeService() {
-        return infosTypeService;
+    public InfosType setInfoType(Delivery delivery, BigInteger ffsId, String ffsVersion, BigInteger supplierId, XMLGregorianCalendar extractionDateTime, XMLGregorianCalendar referenceDate, ShsIsProdType isProd) {
+        InfosType infosType = delivery.getInfos();
+        infosTypeService.setAllVariables(infosType, ffsId, ffsVersion, supplierId, extractionDateTime, referenceDate, isProd);
+        return infosType;
     }
 
     @Override
@@ -142,9 +146,12 @@ public class PlausexServiceImpl implements PlausexService {
             Marshaller marshaller = context.createMarshaller();
 
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            // Add schema location to add `xmlns:xsi` and `xsi:schemaLocation`
-            marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://bfs.ch/shs/delivery/validation xsd/do-b-13.05-SHS-07.xsd");
 
+            // Set xsi:schemaLocation and handle default namespace
+            marshaller.setProperty(
+                    Marshaller.JAXB_SCHEMA_LOCATION,
+                    "http://bfs.ch/shs/delivery/validation do-b-13.05-SHS-07.xsd"
+            );
             File file = new File(path);
             marshaller.marshal(delivery, file);
 
@@ -185,13 +192,10 @@ public class PlausexServiceImpl implements PlausexService {
 
     @Override
     public List<String> validateXMLSchema(String xsdPath, String xmlPath) {
-
         List<String> issues = new ArrayList<>();
-
         try {
             // Create a SchemaFactory for W3C XML Schema
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
             // Load the XSD file as a schema
             Schema schema = factory.newSchema(new File(xsdPath));
 
@@ -208,21 +212,73 @@ public class PlausexServiceImpl implements PlausexService {
                 @Override
                 public void error(SAXParseException exception) throws SAXException {
                     issues.add("ERROR: Line " + exception.getLineNumber() + ": " + exception.getMessage());
+                    // Do not throw, log errors to continue capturing further issues
                 }
 
                 @Override
                 public void fatalError(SAXParseException exception) throws SAXException {
                     issues.add("FATAL: Line " + exception.getLineNumber() + ": " + exception.getMessage());
+                    // Do not throw, log fatal errors to continue capturing further issues
                 }
             });
 
             // Validate the XML file against the schema
             validator.validate(new StreamSource(new File(xmlPath)));
 
+        } catch (SAXException e) {
+            // Handle cases when the validation process halts unexpectedly
+            issues.add("Validation error during processing: " + e.getMessage());
+        } catch (IOException e) {
+            issues.add("IO error: " + e.getMessage());
+        }
+        return issues;
+    }
+
+
+
+    @Override
+    public List<String> validateXMLSchemaWithSax(String xsdPath, String xmlPath) {
+        List<String> issues = new ArrayList<>();
+        try {
+            // Create a SchemaFactory for W3C XML Schema
+            SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            // Load the XSD file as a schema
+            Schema schema = factory.newSchema(new File(xsdPath));
+
+            // Create a SAXParserFactory and enable schema validation
+            SAXParserFactory saxFactory = SAXParserFactory.newInstance();
+            saxFactory.setNamespaceAware(true);
+            saxFactory.setSchema(schema);
+
+            // Create a SAXParser
+            javax.xml.parsers.SAXParser parser = saxFactory.newSAXParser();
+
+            // Set a custom ErrorHandler to capture validation issues
+            XMLReader reader = parser.getXMLReader();
+            reader.setErrorHandler(new ErrorHandler() {
+                @Override
+                public void warning(SAXParseException exception) {
+                    issues.add("WARNING: Line " + exception.getLineNumber() + ": " + exception.getMessage());
+                }
+
+                @Override
+                public void error(SAXParseException exception) {
+                    issues.add("ERROR: Line " + exception.getLineNumber() + ": " + exception.getMessage());
+                }
+
+                @Override
+                public void fatalError(SAXParseException exception) {
+                    issues.add("FATAL: Line " + exception.getLineNumber() + ": " + exception.getMessage());
+                }
+            });
+
+            // Parse the XML file, which will trigger validation
+            reader.parse(new InputSource(new FileInputStream(xmlPath)));
+
         } catch (Exception e) {
             issues.add("Validation failed: " + e.getMessage());
         }
-
         return issues;
     }
+
 }

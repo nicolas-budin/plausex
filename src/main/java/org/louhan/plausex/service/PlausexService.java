@@ -4,14 +4,17 @@ import org.louhan.plausex.xjc.*;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.File;
+import java.math.BigInteger;
 import java.util.List;
 
 public interface PlausexService {
 
     Delivery createDelivery();
 
-    InfosTypeService getInfosTypeService();
+    InfosType setInfoType( Delivery delivery, BigInteger ffsId, String ffsVersion, BigInteger supplierId, XMLGregorianCalendar extractionDateTime, XMLGregorianCalendar referenceDate, ShsIsProdType isProd);
 
+
+    // Dossiers
     // Dossiers
     DossierType addDossier(Delivery delivery);
     DossierType addDossier(Delivery delivery, String dossierId, String dossierProfId, String serviceId, String serviceDescription, String socialBenefitCode, String socialBenefitDesc, int municipalityId, String residentialStatus, String rentFullApartment, String rentShare, String apartmentSize, String hhMembers, String closingReason, String dossierRespPersonId, String dossierRespPersonName, String dateStartEntitlement, AddressCorrespondenceType addressCorrespondence, PersonsType persons);
@@ -34,4 +37,8 @@ public interface PlausexService {
     boolean isValidXMLSchema(String xsdPath, String xmlPath);
 
     List<String> validateXMLSchema(String xsdPath, String xmlPath);
+
+    List<String> validateXMLSchemaWithSax(String xsdPath, String xmlPath);
+
 }
+
