@@ -52,7 +52,7 @@ class PlausexServiceTests {
             this.addAccountingEntry(delivery);
 
             // creates XML
-            File file = this.plausexService.delivery2XML(delivery, "tmp/generated-output-" + System.currentTimeMillis() + ".xml");
+            File file = this.plausexService.delivery2XML(delivery, "generated-output-" + System.currentTimeMillis() + ".xml");
 
             // test against XSD
             String xsdPath = getClass().getClassLoader().getResource("xsd/do-b-13.05-SHS-07.xsd").getPath();
