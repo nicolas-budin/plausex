@@ -106,7 +106,7 @@ public class PlausexServiceImpl implements PlausexService {
     @Override
     public PersonType addPerson(DossierType dossierType, String vn, String officialName, String firstName, String dateOfBirth, ShsSexType sex, ShsMaritalStatusType maritalStatus, ShsSeparationType separation, String countryId, String education, String educationLevel, String employmentSituation, String employmentRate, String relationshipToApplicant, String foreignerCategoryId, String foreignerCategoryDesc, String datEntry, String personId, String personProfId) {
         PersonType personType = this.dossierService.addPerson(dossierType, vn, officialName, firstName, dateOfBirth, sex, maritalStatus, separation, countryId, education, educationLevel, employmentSituation, employmentRate, relationshipToApplicant, foreignerCategoryId, foreignerCategoryDesc, datEntry, personId, personProfId);
-        dossierType.getPersons().getPerson().add(personType);
+
         return personType;
 
     }
@@ -114,7 +114,7 @@ public class PlausexServiceImpl implements PlausexService {
     @Override
     public PersonType addPerson(DossierType dossierType) {
         PersonType personType =  this.dossierService.addPerson(dossierType);
-        dossierType.getPersons().getPerson().add(personType);
+
         return personType;
     }
 
